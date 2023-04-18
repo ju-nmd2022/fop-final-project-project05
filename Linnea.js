@@ -26,3 +26,16 @@ fill(177, 78, 155);
 ellipse(240, 329, 20, 10);
 
 //pasefyer
+
+fill(54, 149, 236);
+noStroke();
+ellipse(195, 342, 15);
+
+fill(54, 149, 236);
+noStroke();
+ellipse(207, 342, 15);
+
+noFill();
+stroke(7, 103, 192);
+strokeWeight(2);
+triangle(195, 340, 207, 340, 200, 352);
