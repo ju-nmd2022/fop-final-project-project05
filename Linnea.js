@@ -27,7 +27,7 @@ ellipse(158, 329, 20, 10);
 fill(177, 78, 155);
 ellipse(240, 329, 20, 10);
 
-//pasefyer
+//pacifier
 
 fill(54, 149, 236);
 noStroke();
@@ -44,7 +44,7 @@ ellipse(201, 342, 15, 5);
 noFill();
 stroke(7, 103, 192);
 strokeWeight(2);
-bezier(195, 342, 199, 450, 201, 450, 206, 342);
+bezier(195, 342, 199, 350, 201, 360, 206, 342);
 
 //right ear
 push();
