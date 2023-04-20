@@ -38,4 +38,40 @@ ellipse(207, 342, 15);
 noFill();
 stroke(7, 103, 192);
 strokeWeight(2);
-triangle(195, 340, 207, 340, 200, 352);
+triangle(195, 340, 207, 340, 201, 352);
+
+//right ear
+push();
+fill(208, 128, 190);
+noStroke();
+translate(158, 0);
+rotate(PI / 8);
+rect(158, 130, 10, 70, 3);
+pop();
+
+//ear flapp
+push();
+translate(124, -78);
+rotate(PI / 5);
+fill(208, 128, 190);
+noStroke();
+rect(259, 130, 40, 15, 5);
+pop();
+
+//left ear
+
+push();
+fill(208, 128, 190);
+noStroke();
+translate(128, 130);
+rotate(PI / -8);
+rect(-10, 54, 10, 70, 3);
+pop();
+
+//ear flapp
+
+fill(208, 128, 190);
+noStroke();
+translate(122, 170);
+rotate(PI / -5);
+rect(-10, 0, 40, 15, 5);
