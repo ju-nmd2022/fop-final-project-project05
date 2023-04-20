@@ -95,14 +95,6 @@ strokeWeight(5);
 ellipse(230, 378, 40, 10);
 
 //MAMA MONSTER
-//Arms
-
-//Left
-
-fill(190, 155, 202);
-stroke(125, 69, 113);
-strokeWeight(3);
-bezier(405, 248, 388, 201);
 
 //Body
 fill(190, 155, 202);
@@ -188,3 +180,12 @@ fill(190, 155, 202);
 stroke(125, 69, 113);
 strokeWeight(6);
 ellipse(500, 388, 25, 25);
+
+//Arms
+
+//Left
+
+fill(190, 155, 202);
+stroke(125, 69, 113);
+strokeWeight(3);
+beginShape();
