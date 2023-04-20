@@ -31,16 +31,20 @@ ellipse(240, 329, 20, 10);
 
 fill(54, 149, 236);
 noStroke();
-ellipse(195, 342, 15);
+ellipse(196, 342, 15);
 
 fill(54, 149, 236);
 noStroke();
-ellipse(207, 342, 15);
+ellipse(206, 342, 15);
+
+fill(7, 103, 192);
+noStroke();
+ellipse(201, 342, 15, 5);
 
 noFill();
 stroke(7, 103, 192);
 strokeWeight(2);
-triangle(195, 340, 207, 340, 201, 352);
+bezier(195, 342, 199, 450, 201, 450, 206, 342);
 
 //right ear
 push();
