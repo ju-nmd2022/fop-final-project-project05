@@ -74,4 +74,4 @@ fill(208, 128, 190);
 noStroke();
 translate(122, 170);
 rotate(PI / -5);
-rect(-10, 0, 40, 15, 5);
+rect(-25, 21, 40, 15, 5);
