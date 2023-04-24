@@ -100,6 +100,38 @@ ellipse(230, 378, 40, 10);
 
 //MAMA MONSTER
 
+//Arms
+
+//Left
+
+fill(190, 155, 202);
+stroke(125, 69, 113);
+strokeWeight(5);
+beginShape();
+curveVertex(522, 277);
+curveVertex(522, 277);
+curveVertex(537, 203);
+curveVertex(567, 215);
+curveVertex(563, 261);
+curveVertex(540, 300);
+curveVertex(540, 300);
+endShape();
+
+//Right
+
+fill(190, 155, 202);
+stroke(125, 69, 113);
+strokeWeight(5);
+beginShape();
+curveVertex(409, 277);
+curveVertex(409, 277);
+curveVertex(399, 203);
+curveVertex(366, 215);
+curveVertex(371, 261);
+curveVertex(403, 300);
+curveVertex(403, 300);
+endShape();
+
 //Body
 fill(190, 155, 202);
 stroke(125, 69, 113);
@@ -184,12 +216,3 @@ fill(190, 155, 202);
 stroke(125, 69, 113);
 strokeWeight(6);
 ellipse(500, 388, 25, 25);
-
-//Arms
-
-//Left
-
-fill(190, 155, 202);
-stroke(125, 69, 113);
-strokeWeight(3);
-beginShape();
