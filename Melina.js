@@ -1,10 +1,22 @@
 background(255, 255, 255);
 // Monster Guide Layout
+stroke(152, 218, 214);
+strokeWeight(5);
+line(185, 230, 185, 300);
+line(225, 230, 225, 300);
 fill(152, 218, 214);
+ellipse(170, 299, 30, 10);
+ellipse(210, 299, 30, 10);
 noStroke();
 ellipse(160, 166, 15, 40);
 ellipse(240, 166, 15, 40);
 stroke(90, 110, 129);
 strokeWeight(4);
+fill(152, 218, 214);
 ellipse(200, 200, 100);
-line(170, 180, 140);
+fill(255, 255, 250);
+noStroke();
+ellipse(180, 200, 15, 30);
+ellipse(220, 200, 15, 30);
+fill(255, 255, 255);
+ellipse(10, 10, 10, 10);
