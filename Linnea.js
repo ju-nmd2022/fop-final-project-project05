@@ -216,3 +216,9 @@ fill(190, 155, 202);
 stroke(125, 69, 113);
 strokeWeight(6);
 ellipse(500, 388, 25, 25);
+
+//Coin
+
+fill(233, 236, 73);
+noStroke();
+ellipse(307, 95, 18, 18);
