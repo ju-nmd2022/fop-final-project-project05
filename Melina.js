@@ -66,7 +66,7 @@ ellipse(400, 200, 25);
 ellipse(470, 200, 25);
 
 // pupils
-fill(217, 217, 217);
+fill(222, 222, 222);
 triangle(389, 205, 400, 189, 410, 205);
 triangle(459, 205, 470, 189, 480, 205);
 
@@ -77,4 +77,18 @@ triangle(422, 230, 430, 250, 445, 235);
 triangle(445, 235, 452, 253, 465, 240);
 
 // smile curve
-bezier(394, 231, 400, 217, 400, 224);
+bezier(394, 236, 430, 215, 400, 224, 399, 226);
+
+// hat-base
+fill(131, 91, 73, 255);
+stroke(61, 7, 7, 255);
+push();
+angleMode(DEGREES);
+rotate(10);
+ellipse(425, 70, 220, 80);
+pop();
+
+// hat-top
+beginShape();
+vertex(350, 150);
+bezierVertex();
