@@ -12,6 +12,10 @@ function button() {
   pop();
 }
 
+function buttonAnimation() {
+  button();
+}
+
 function babyMonster() {
   // function babyMonster
 
@@ -129,7 +133,7 @@ function startScreen() {
   pop();
 
   // function insert
-  button();
+  buttonAnimation();
   babyMonster();
 }
 
@@ -140,7 +144,13 @@ function winScreen() {
 }
 function draw() {
   //   button mouse clicked
-  if (mouseIsPressed && mouseX < 495 && mouseX > 240) {
+  if (
+    mouseIsPressed &&
+    mouseX < 495 &&
+    mouseX > 240 &&
+    mouseY < 360 &&
+    mouseY > 300
+  ) {
     state = "win";
   }
   // state switch
