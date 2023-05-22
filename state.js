@@ -12,10 +12,6 @@ function button() {
   pop();
 }
 
-function buttonAnimation() {
-  button();
-}
-
 function babyMonster() {
   // function babyMonster
 
@@ -133,7 +129,7 @@ function startScreen() {
   pop();
 
   // function insert
-  buttonAnimation();
+  button();
   babyMonster();
 }
 
