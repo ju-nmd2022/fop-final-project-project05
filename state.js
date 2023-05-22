@@ -144,19 +144,22 @@ function startScreen() {
   babyMonster();
 }
 
+// Screens
+
 let state = "start";
 
 function winScreen() {
   background(240, 50, 50);
 }
+
 function draw() {
   //   button mouse clicked
   if (
     mouseIsPressed &&
     mouseX < 495 &&
     mouseX > 240 &&
-    mouseY < 360 &&
-    mouseY > 300
+    mouseY < 270 &&
+    mouseY > 200
   ) {
     state = "win";
   }
