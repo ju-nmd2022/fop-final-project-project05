@@ -1,7 +1,30 @@
-//BABY MONSTER
-function baby(x, y) {
+function button() {
+  // button animation change colour, stroke and size
+
+  let buttonColor = color(231, 190, 24);
+  let buttonStroke = color(202, 166, 21);
+
+  if (mouseX < 495 && mouseX > 240 && mouseY < 270 && mouseY > 200) {
+    buttonColor = color(231, 0, 24);
+    buttonStroke = color(202, 0, 21);
+    buttonWeight = 100;
+  }
+
+  // function button
   push();
-  translate(x, y);
+  strokeWeight(10);
+  stroke(buttonStroke);
+  fill(buttonColor);
+  rect(200, 200, 300, 70, 20);
+  fill(0, 0, 0);
+  noStroke();
+  textSize(40);
+  text("P L A Y", 280, 250);
+  pop();
+}
+
+function babyMonster() {
+  // function babyMonster
 
   //body
   fill(238, 161, 221);
@@ -101,21 +124,46 @@ function baby(x, y) {
   strokeWeight(5);
   ellipse(230, 378, 40, 10);
 
+  //   if this is removed a pink stroke is put on the ground function
+  noStroke();
+}
+function startScreen() {
+  //   background colour
+  background(82, 89, 173);
+
+  //  ground background
+  push();
+  fill(83, 73, 73);
+  rect(0, 400, 700, 300);
+  fill(111, 153, 86);
+  rect(0, 400, 700, 60);
   pop();
+
+  // function insert
+  button();
+  babyMonster();
 }
 
-// baby monster movement with keys
+let state = "start";
 
-let x = 100;
-let y = 100;
-let speed = 0;
-
+function winScreen() {
+  background(240, 50, 50);
+}
 function draw() {
-  baby(x, y);
-
-  if (keyIsDown(38)) {
-    speed = 5;
-  } else {
-    speed = 0;
+  //   button mouse clicked
+  if (
+    mouseIsPressed &&
+    mouseX < 495 &&
+    mouseX > 240 &&
+    mouseY < 360 &&
+    mouseY > 300
+  ) {
+    state = "win";
+  }
+  // state switch
+  if (state === "start") {
+    startScreen();
+  } else if (state === "win") {
+    winScreen();
   }
 }
