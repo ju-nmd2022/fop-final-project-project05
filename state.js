@@ -1,15 +1,4 @@
-background(82, 89, 173);
-
-function startScreen() {
-  // ground for start screen
-  //  function ground() {
-  push();
-  fill(83, 73, 73);
-  rect(0, 400, 700, 300);
-  fill(111, 153, 86);
-  rect(0, 400, 700, 60);
-  pop();
-
+function button() {
   // function button
   push();
   fill(231, 190, 24);
@@ -21,8 +10,11 @@ function startScreen() {
   textSize(40);
   text("P L A Y", 280, 350);
   pop();
+}
 
+function babyMonster() {
   // function babyMonster
+
   //body
   fill(238, 161, 221);
   stroke(177, 78, 155);
@@ -124,6 +116,22 @@ function startScreen() {
   //   if this is removed a pink stroke is put on the ground function
   noStroke();
 }
+function startScreen() {
+  //   background colour
+  background(82, 89, 173);
+
+  //  ground background
+  push();
+  fill(83, 73, 73);
+  rect(0, 400, 700, 300);
+  fill(111, 153, 86);
+  rect(0, 400, 700, 60);
+  pop();
+
+  // function insert
+  button();
+  babyMonster();
+}
 
 let state = "start";
 
@@ -131,6 +139,11 @@ function winScreen() {
   background(240, 50, 50);
 }
 function draw() {
+  //   button mouse clicked
+  if (mouseIsPressed && mouseX < 495 && mouseX > 240) {
+    state = "win";
+  }
+  // state switch
   if (state === "start") {
     startScreen();
   } else if (state === "win") {
