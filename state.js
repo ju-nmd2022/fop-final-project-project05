@@ -125,7 +125,15 @@ function startScreen() {
   noStroke();
 }
 
-function winScreen() {}
+let state = "start";
+
+function winScreen() {
+  background(240, 50, 50);
+}
 function draw() {
-  startScreen();
+  if (state === "start") {
+    startScreen();
+  } else if (state === "win") {
+    winScreen();
+  }
 }
