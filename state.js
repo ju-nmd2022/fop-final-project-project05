@@ -1,14 +1,25 @@
 function button() {
+  // button animation change colour, stroke and size
+
+  let buttonColor = color(231, 190, 24);
+  let buttonStroke = color(202, 166, 21);
+
+  if (mouseX < 495 && mouseX > 240 && mouseY < 270 && mouseY > 200) {
+    buttonColor = color(231, 0, 24);
+    buttonStroke = color(202, 0, 21);
+    buttonWeight = 100;
+  }
+
   // function button
   push();
-  fill(231, 190, 24);
   strokeWeight(10);
-  stroke(202, 166, 21);
-  rect(200, 300, 300, 70, 20);
+  stroke(buttonStroke);
+  fill(buttonColor);
+  rect(200, 200, 300, 70, 20);
   fill(0, 0, 0);
   noStroke();
   textSize(40);
-  text("P L A Y", 280, 350);
+  text("P L A Y", 280, 250);
   pop();
 }
 
