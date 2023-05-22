@@ -1,3 +1,7 @@
+function setup() {
+  createCanvas(600, 440);
+}
+
 function button() {
   // button animation change colour, stroke and size
 
