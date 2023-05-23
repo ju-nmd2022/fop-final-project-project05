@@ -2,7 +2,7 @@ let startButn;
 let trees;
 function preload() {
   startButn = loadImage("../../img/play_button.png");
-  trees = loadImage("../../img/start_background.jpg");
+  trees = loadImage("../../img/forrest.jpg");
 }
 function setup() {
   createCanvas(800, 600);
