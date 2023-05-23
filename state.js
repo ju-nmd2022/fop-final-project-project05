@@ -1,6 +1,15 @@
 function setup() {
   createCanvas(800, 600);
 }
+// images preload
+
+// background
+let forrest;
+function preload() {
+  forrest = loadImage("img/start_background.jpg");
+
+  // play button
+}
 
 function button() {
   // button animation change colour, stroke and size
@@ -14,7 +23,7 @@ function button() {
     buttonWeight = 100;
   }
 
-  // function button
+  // button
   push();
   strokeWeight(10);
   stroke(buttonStroke);
@@ -133,15 +142,17 @@ function babyMonster() {
 }
 function startScreen() {
   //   background colour
-  background(82, 89, 173);
+  //   background(82, 89, 173);
+  forrest.resize(1000, 600);
+  image(forrest, 0, 0, width, height);
 
-  //  ground background
-  push();
-  fill(83, 73, 73);
-  rect(0, 400, 700, 300);
-  fill(111, 153, 86);
-  rect(0, 400, 700, 60);
-  pop();
+  // //    ground background
+  //   push();
+  //   fill(83, 73, 73);
+  //   rect(0, 400, 700, 300);
+  //   fill(111, 153, 86);
+  //   rect(0, 400, 700, 60);
+  // //   pop();
 
   // function insert
   button();
