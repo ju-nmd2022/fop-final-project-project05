@@ -1,14 +1,11 @@
+let startButn;
+let trees;
+function preload() {
+  startButn = loadImage("../../img/play_button.png");
+  trees = loadImage("../../img/start_background.jpg");
+}
 function setup() {
   createCanvas(800, 600);
-}
-// images preload
-
-// background
-let forrest;
-function preload() {
-  forrest = loadImage("img/start_background.jpg");
-
-  // play button
 }
 
 function button() {
@@ -25,14 +22,15 @@ function button() {
 
   // button
   push();
-  strokeWeight(10);
-  stroke(buttonStroke);
-  fill(buttonColor);
-  rect(200, 200, 300, 70, 20);
-  fill(0, 0, 0);
-  noStroke();
-  textSize(40);
-  text("P L A Y", 280, 250);
+  image(startButn, 260, 300, 350, 120);
+  // strokeWeight(10);
+  // stroke(buttonStroke);
+  // fill(buttonColor);
+  // rect(200, 200, 300, 70, 20);
+  // fill(0, 0, 0);
+  // noStroke();
+  // textSize(40);
+  // text("P L A Y", 280, 250);
   pop();
 }
 
@@ -143,16 +141,15 @@ function babyMonster() {
 function startScreen() {
   //   background colour
   //   background(82, 89, 173);
-  forrest.resize(1000, 600);
-  image(forrest, 0, 0, width, height);
 
   // //    ground background
-  //   push();
-  //   fill(83, 73, 73);
-  //   rect(0, 400, 700, 300);
-  //   fill(111, 153, 86);
-  //   rect(0, 400, 700, 60);
-  // //   pop();
+  image(trees, 0, 0, 800, 600);
+  // push();
+  // fill(83, 73, 73);
+  // rect(0, 400, 700, 300);
+  // fill(111, 153, 86);
+  // rect(0, 400, 700, 60);
+  //   pop();
 
   // function insert
   button();
