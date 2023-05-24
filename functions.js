@@ -1,7 +1,9 @@
-let playerX = 0;
-let playerY = 0;
+let playerX = 1;
+let playerY = 2;
 let playerImg;
 const tileSize = 20;
+let mamaX = 350;
+let mamaY = 312;
 
 const map = [
   [
@@ -156,6 +158,7 @@ const map = [
 
 function setup() {
   createCanvas(800, 600);
+  frameRate(18);
   playerImg = loadImage("babymonster.png");
 }
 
@@ -164,6 +167,7 @@ function draw() {
   drawPlayer();
   movePlayer();
   checkCollision();
+  monstermama();
 }
 
 function drawMap() {
@@ -236,3 +240,113 @@ function checkCollision() {
     console.log("Collision detected!");
   }
 }
+
+function monstermama() {
+  push();
+
+  translate(mamaX, mamaY);
+
+  //Arms
+
+  //Left
+
+  fill(190, 155, 202);
+  stroke(125, 69, 113);
+  strokeWeight(1.5);
+  ellipse(429, 229, 7, 7);
+
+  //Right
+
+  fill(190, 155, 202);
+  stroke(125, 69, 113);
+  strokeWeight(1.5);
+  ellipse(398, 228, 7, 7);
+
+  //Body
+  fill(190, 155, 202);
+  stroke(125, 69, 113);
+  strokeWeight(3);
+  rect(401, 210, 25, 30, 30);
+
+  //eyes
+
+  //whites
+
+  fill(255, 255, 255);
+  noStroke();
+  ellipse(410, 220, 5, 5);
+
+  fill(255, 255, 255);
+  noStroke();
+  ellipse(418, 220, 5, 5);
+
+  //iris
+
+  fill(24, 24, 24);
+  noStroke();
+  ellipse(411, 220, 2, 2);
+
+  fill(24, 24, 24);
+  noStroke();
+  ellipse(417, 220, 2, 2);
+
+  //Nose
+
+  fill(208, 128, 190);
+  noStroke();
+  ellipse(414, 228, 8, 4);
+
+  //nostrils
+
+  //left
+
+  push();
+  fill(177, 78, 155);
+  noStroke();
+  translate(401, 227);
+  rotate(PI / 8);
+  ellipse(10, -3, 3.5, 2);
+  pop();
+
+  //right
+
+  push();
+  fill(177, 78, 155);
+  noStroke();
+  translate(385, 227);
+  rotate(PI / -8);
+  ellipse(28, 13, 3.5, 2);
+  pop();
+
+  //Mouth
+
+  fill(156, 37, 87);
+  noStroke();
+  ellipse(416, 233.5, 5, 5);
+
+  push();
+  fill(255, 255, 255);
+  noStroke();
+  translate(416.5, 234.5);
+  rotate(PI / -8);
+  ellipse(0, 0, 4, 2);
+  pop();
+
+  //Legs
+
+  //right leg
+
+  fill(190, 155, 202);
+  stroke(125, 69, 113);
+  strokeWeight(2);
+  ellipse(406, 242, 8, 8);
+
+  //Left leg
+  fill(190, 155, 202);
+  stroke(125, 69, 113);
+  strokeWeight(2);
+  ellipse(420, 242, 8, 8);
+  pop();
+}
+
+// går att flytta upp denna till början
