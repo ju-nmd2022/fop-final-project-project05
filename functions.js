@@ -348,5 +348,3 @@ function monstermama() {
   ellipse(420, 242, 8, 8);
   pop();
 }
-
-// går att flytta upp denna till början
