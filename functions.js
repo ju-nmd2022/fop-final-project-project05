@@ -1,6 +1,9 @@
+let playerX = 0.5;
+let playerY = 1;
+const tileSize = 12;
+
 function setup() {
   createCanvas(800, 600);
-  noLoop();
 }
 
 function drawMap() {
@@ -111,7 +114,6 @@ function drawMap() {
         noStroke();
         fill(83, 73, 73);
       } else if (tileValue === 1) {
-        noStroke();
         fill(111, 153, 86);
       }
 
@@ -120,9 +122,9 @@ function drawMap() {
   }
 }
 
-function drawBaby() {
+function drawPlayer() {
   push();
-  translate(babyX, babyY);
+  translate(playerX * tileSize, playerY * tileSize, tileSize, tileSize);
 
   //Feet
 
@@ -183,8 +185,17 @@ function drawBaby() {
   pop();
 }
 
-let babyX = -170;
-let babyY = -241;
+function keyPressed() {
+  if (keyIsDown(38)) {
+    playerY--;
+  } else if (keyIsDown(40)) {
+    playerY++;
+  } else if (keyIsDown(37)) {
+    playerX--;
+  } else if (keyIsDown(39)) {
+    playerX++;
+  }
+}
 
 function drawMama() {
   push();
@@ -297,8 +308,10 @@ function drawMama() {
 let mamaX = 350;
 let mamaY = 312;
 
+//
+
 function draw() {
   drawMap();
-  drawBaby();
+  drawPlayer();
   drawMama();
 }
