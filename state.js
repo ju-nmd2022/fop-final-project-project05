@@ -1,42 +1,34 @@
 let startButn;
 let trees;
+
 function preload() {
   startButn = loadImage("../../img/play_button.png");
-  trees = loadImage("../../img/start_background.jpg");
+  trees = loadImage("../../img/forrest.png");
 }
+
 function setup() {
   createCanvas(800, 600);
 }
 
+// button animation change colour, stroke and size
+let butnColor = color(240, 20, 20);
+
 function button() {
-  // button animation change colour, stroke and size
+  // button design
 
-  let buttonColor = color(231, 190, 24);
-  let buttonStroke = color(202, 166, 21);
+  image(startButn, 225, 300, 350, 120);
 
-  if (mouseX < 495 && mouseX > 240 && mouseY < 270 && mouseY > 200) {
-    buttonColor = color(231, 0, 24);
-    buttonStroke = color(202, 0, 21);
-    buttonWeight = 100;
+  fill(butnColor);
+  rect(225, 300, 355, 120, 50);
+
+  if (mouseX > 225 && mouseX < 566 && mouseY > 180 && mouseY < 250) {
+    butnColor = color(0, 0, 0);
   }
-
-  // button
-  push();
-  image(startButn, 260, 300, 350, 120);
-  // strokeWeight(10);
-  // stroke(buttonStroke);
-  // fill(buttonColor);
-  // rect(200, 200, 300, 70, 20);
-  // fill(0, 0, 0);
-  // noStroke();
-  // textSize(40);
-  // text("P L A Y", 280, 250);
-  pop();
 }
 
 function babyMonster() {
   // function babyMonster
-
+  push();
   //body
   fill(238, 161, 221);
   stroke(177, 78, 155);
@@ -139,17 +131,7 @@ function babyMonster() {
   noStroke();
 }
 function startScreen() {
-  //   background colour
-  //   background(82, 89, 173);
-
-  // //    ground background
   image(trees, 0, 0, 800, 600);
-  // push();
-  // fill(83, 73, 73);
-  // rect(0, 400, 700, 300);
-  // fill(111, 153, 86);
-  // rect(0, 400, 700, 60);
-  //   pop();
 
   // function insert
   button();
