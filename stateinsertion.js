@@ -371,21 +371,6 @@ function monsterMamaStart() {
   ellipse(134, 480, 25, 25);
 }
 
-// Screens
-
-// start screen
-function startScreen() {
-  image(treeImg, 0, 0, 0, 0);
-  babyMonsterStart();
-  monsterMamaStart();
-
-  // text
-  textSize(45);
-  stroke(0, 0, 0);
-  fill(255, 255, 255);
-  text("BABY MONSTER", 240, 270);
-}
-
 // draw statements for the tilemap
 function drawMap() {
   for (let y = 0; y < map.length; y++) {
@@ -571,6 +556,83 @@ function checkCollision() {
   }
 }
 
+// baby monster for winning screen layout
+function babyMonsterWin() {
+  //BABY MONSTER
+
+  //body
+  fill(238, 161, 221);
+  stroke(177, 78, 155);
+  strokeWeight(5);
+  ellipse(300, 400, 100);
+
+  //Feet
+
+  //right foot
+
+  fill(238, 161, 221);
+  stroke(177, 78, 155);
+  strokeWeight(5);
+  ellipse(280, 455, 40, 10);
+
+  //Left foot
+  fill(238, 161, 221);
+  stroke(177, 78, 155);
+  strokeWeight(5);
+  ellipse(320, 455, 40, 10);
+}
+
+// monster mama for winning screen
+function monsterMamaWin() {
+  //right leg
+  fill(190, 155, 202);
+  stroke(125, 69, 113);
+  strokeWeight(6);
+  ellipse(500, 490, 25, 25);
+
+  //Body
+  fill(190, 155, 202);
+  stroke(125, 69, 113);
+  strokeWeight(7);
+  rect(390, 320, 140, 170, 80);
+
+  //left leg
+
+  fill(190, 155, 202);
+  stroke(125, 69, 113);
+  strokeWeight(6);
+  ellipse(430, 490, 25, 25);
+}
+
+// info box for winning and failing screen
+function info() {
+  stroke(220, 220, 240, 180);
+  fill(230, 255, 240, 180);
+  rect(250, 100, 300, 200, 20);
+}
+
+// text shown when player wins game
+function textinfoWin() {
+  textSize(45);
+  stroke(0, 0, 0);
+  fill(255, 255, 255);
+  text("Thank you for helping me find my mama. ", 240, 270);
+}
+
+// Screens
+
+// start screen
+function startScreen() {
+  image(treeImg, 0, 0, 0, 0);
+  babyMonsterStart();
+  monsterMamaStart();
+
+  // text
+  textSize(45);
+  stroke(0, 0, 0);
+  fill(255, 255, 255);
+  text("BABY MONSTER", 240, 270);
+}
 // game screen
 function gameScreen() {
   frameRate(18);
@@ -581,7 +643,16 @@ function gameScreen() {
   monsterMamaGame();
 }
 
-let state = "game";
+// winnig screen yay
+function winScreen() {
+  image(sunImg, 0, 0, 0, 0);
+  babyMonsterWin();
+  monsterMamaWin();
+  textInfoWin();
+  info();
+}
+
+let state = "win";
 
 function draw() {
   // state switch
