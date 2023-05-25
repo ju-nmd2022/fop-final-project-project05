@@ -275,7 +275,7 @@ function babyMonsterStart() {
   fill(208, 128, 185);
   noStroke();
   translate(700, 230);
-  rotate();
+  rotate(15);
   rect(0, 0, 15, 120, 6);
   pop();
 
@@ -284,7 +284,7 @@ function babyMonsterStart() {
   push();
   fill(208, 128, 190);
   noStroke();
-  translate(715, 320);
+  translate(684, 315);
   rotate(-20);
   rect(-25, 21, 69, 15, 5);
   pop();
