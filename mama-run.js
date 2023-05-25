@@ -16,9 +16,20 @@ export default class MonsterMamaRun {
     fill(190, 155, 202);
     stroke(125, 69, 113);
     strokeWeight(5);
+    // beginShape();
+    // curveVertex(522, 277);
+    // curveVertex(522, 277);
+    // curveVertex(537, 203);
+    // curveVertex(567, 215);
+    // curveVertex(563, 261);
+    // curveVertex(540, 300);
+    // curveVertex(540, 300);
+    // endShape();
 
     ellipse(this.x - 65, this.y + 245, 30, 100);
     ellipse(this.x + 85, this.y + 245, 30, 100);
+
+    //Right
 
     //Body
     fill(190, 155, 202);
@@ -107,3 +118,4 @@ export default class MonsterMamaRun {
     ellipse(this.x + 35, this.y + 380, 25, 25);
   }
 }
+let mamaRun = new MonsterMamaRun(100, 100);
