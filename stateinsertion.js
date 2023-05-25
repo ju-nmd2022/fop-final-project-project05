@@ -588,9 +588,73 @@ function babyMonsterFail() {
   noStroke();
   ellipse(320, 413, 45, 15);
 
+  //pacifier
+  stroke(7, 103, 192);
+  strokeWeight(2);
+
+  push();
+  translate(120, 120);
+  fill(54, 149, 236);
+  noStroke();
+  ellipse(196, 342, 15);
+
+  fill(54, 149, 236);
+  noStroke();
+  ellipse(206, 342, 15);
+
+  fill(7, 103, 192);
+  noStroke();
+  ellipse(201, 342, 15, 5);
+
+  noFill();
+  stroke(7, 103, 192);
+  strokeWeight(2);
+  bezier(195, 342, 199, 350, 201, 360, 206, 342);
+  pop();
+
   // tear
   fill(36, 166, 219);
-  ellipse(310, 460, 10, 20);
+  ellipse(300, 450, 5, 15);
+
+  //right ear
+  angleMode(DEGREES);
+  push();
+  translate(375, 380);
+  fill(208, 128, 190);
+  noStroke();
+  rotate(65);
+  rect(0, 0, 5, 60, 6);
+  pop();
+
+  //ear flapp
+  angleMode(DEGREES);
+  push();
+  translate(330, 365);
+  rotate(30);
+  fill(208, 128, 190);
+  noStroke();
+  rect(0, 0, 15, 5, 5);
+  pop();
+
+  //left ear
+  angleMode(DEGREES);
+  push();
+  fill(208, 128, 185);
+  noStroke();
+  translate(330, 366);
+  rotate(40);
+  rect(0, 0, 5, 60, 6);
+  pop();
+
+  // right ear flapp
+  angleMode(DEGREES);
+  push();
+  fill(208, 128, 190);
+  noStroke();
+  translate(375, 380);
+  rotate(30);
+  rect(0, 0, 15, 5, 5);
+  pop();
 }
 
 // text shown when player fails game
@@ -651,7 +715,7 @@ function failScreen() {
   textInfoFail();
 }
 
-let state = "start";
+let state = "fail";
 let gameTimer = 0;
 
 // timer layout
