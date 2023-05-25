@@ -612,11 +612,74 @@ function info() {
 }
 
 // text shown when player wins game
-function textinfoWin() {
-  textSize(45);
+function textInfoWin() {
+  textSize(10);
   stroke(0, 0, 0);
   fill(255, 255, 255);
   text("Thank you for helping me find my mama. ", 240, 270);
+}
+
+// baby monster failing screen layout
+function babyMonsterFail() {
+  //right foot
+  fill(238, 161, 221);
+  stroke(177, 78, 155);
+  strokeWeight(5);
+  ellipse(320, 480, 40, 10);
+
+  //body
+  fill(238, 161, 221);
+  stroke(177, 78, 155);
+  strokeWeight(5);
+  ellipse(300, 430, 100);
+
+  //Feet
+
+  //left foot
+
+  fill(238, 161, 221);
+  stroke(177, 78, 155);
+  strokeWeight(5);
+  ellipse(290, 485, 40, 10);
+
+  //eye
+  fill(24, 24, 24);
+  noStroke();
+  ellipse(320, 430, 40);
+
+  fill(255, 255, 255);
+  noStroke();
+  ellipse(315, 440, 10);
+
+  fill(255, 255, 255);
+  noStroke();
+  ellipse(330, 435, 5);
+
+  // eyelid
+  fill(238, 161, 221);
+  ellipse(320, 420, 45, 20);
+  fill(238, 161, 221);
+  stroke(177, 78, 155);
+  strokeWeight(5);
+  ellipse(320, 420, 45, 20);
+  noStroke();
+  ellipse(320, 413, 45, 15);
+
+  // tear
+  fill(36, 166, 219);
+  ellipse(310, 460, 10, 20);
+}
+
+// text shown when player fails game
+function textInfoFail() {
+  textSize(15);
+  noStroke();
+  fill(20, 20, 20);
+  text(
+    "You did not help baby monster, he has to sleep in the woods tonight. Will you try to help me home again?",
+    240,
+    270
+  );
 }
 
 // Screens
@@ -648,11 +711,19 @@ function winScreen() {
   image(sunImg, 0, 0, 0, 0);
   babyMonsterWin();
   monsterMamaWin();
-  textInfoWin();
   info();
+  textInfoWin();
 }
 
-let state = "win";
+// fail screen
+function failScreen() {
+  image(scaryImg, 0, 0, 0, 0);
+  babyMonsterFail();
+  info();
+  textInfoFail();
+}
+
+let state = "fail";
 
 function draw() {
   // state switch
