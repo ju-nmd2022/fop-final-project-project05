@@ -676,10 +676,12 @@ function textInfoFail() {
   noStroke();
   fill(20, 20, 20);
   text(
-    "You did not help baby monster, he has to sleep in the woods tonight. Will you try to help me home again?",
-    240,
-    270
+    "You did not help baby monster, he has to sleep in the woods tonight.",
+    300,
+    120,
+    200
   );
+  text(">> Will you try to help me home again?<<", 300, 220, 200);
 }
 
 // Screens
