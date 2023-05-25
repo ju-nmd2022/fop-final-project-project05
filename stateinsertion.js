@@ -709,6 +709,7 @@ function gameScreen() {
   movePlayer();
   checkCollision();
   monsterMamaGame();
+  timer();
 }
 
 // winnig screen yay
@@ -728,8 +729,15 @@ function failScreen() {
   textInfoFail();
 }
 
-let state = "start";
+let state = "win";
 let gameTimer = 0;
+
+// timer layout
+function timer() {
+  textSize(20);
+  fill(255, 255, 255);
+  text("Time:" + gameTimer, 710, 0, 200);
+}
 
 // press spacebar to start game from start, game and win screen
 function draw() {
