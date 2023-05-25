@@ -750,11 +750,6 @@ function draw() {
     state = "game";
   }
 
-  // how to win the game
-  if (playerX === mamaX && playerY === mamaY) {
-    state = "win";
-  }
-
   // state display
   if (state === "start") {
     startScreen();
