@@ -3,6 +3,15 @@ let treeImg;
 let scaryImg;
 let sunImg;
 
+//game values
+let playerX = 1;
+let playerY = 2;
+let playerImg;
+const tileSize = 20;
+let mamaX = 350;
+let mamaY = 312;
+
+// image load for p5canvas.js
 function preload() {
   treeImg = loadImage("img/tree.png");
   scaryImg = loadImage("img/scary.png");
@@ -12,7 +21,7 @@ function preload() {
 function setup() {
   createCanvas(800, 600);
   frameRate(18);
-  playerImg = loadImage("babymonster.png");
+  playerImg = loadImage("img/babymonster.png");
 }
 
 //   baby monster start screen
@@ -224,10 +233,78 @@ function startScreen() {
   text("BABY MONSTER", 240, 270);
 }
 
-// game screen
-function gameScreen() {}
+// draw statements for the tilemap
+function drawMap() {
+  for (let y = 0; y < map.length; y++) {
+    for (let x = 0; x < map[y].length; x++) {
+      if (map[y][x] === 1) {
+        noStroke();
+        fill(111, 153, 86);
+      } else {
+        fill(83, 73, 73);
+      }
+      rect(x * tileSize, y * tileSize, tileSize, tileSize);
+    }
+  }
+}
 
-let state = "start";
+// characther draw
+function drawPlayer() {
+  image(
+    playerImg,
+    playerX * tileSize,
+    playerY * tileSize,
+    tileSize * 2,
+    tileSize * 2
+  );
+}
+
+function movePlayer() {
+  if (keyIsDown(37)) {
+    if (
+      playerX > 0 &&
+      map[playerY][playerX - 1] === 0 &&
+      map[playerY + 1][playerX - 1] === 0
+    ) {
+      playerX--;
+    }
+  } else if (keyIsDown(39)) {
+    if (
+      playerX < map[0].length - 2 &&
+      map[playerY][playerX + 2] === 0 &&
+      map[playerY + 1][playerX + 2] === 0
+    ) {
+      playerX++;
+    }
+  } else if (keyIsDown(38)) {
+    if (
+      playerY > 0 &&
+      map[playerY - 1][playerX] === 0 &&
+      map[playerY - 1][playerX + 1] === 0
+    ) {
+      playerY--;
+    }
+  } else if (keyIsDown(40)) {
+    if (
+      playerY < map.length - 2 &&
+      map[playerY + 2][playerX] === 0 &&
+      map[playerY + 2][playerX + 1] === 0
+    ) {
+      playerY++;
+    }
+  }
+}
+
+// game screen
+function gameScreen() {
+  drawMap();
+  drawPlayer();
+  movePlayer();
+  checkCollision();
+  monstermama();
+}
+
+let state = "game";
 
 function draw() {
   // state switch
