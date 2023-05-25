@@ -694,10 +694,12 @@ function startScreen() {
   monsterMamaStart();
 
   // text
-  textSize(45);
+  textSize(60);
   stroke(0, 0, 0);
   fill(255, 255, 255);
-  text("BABY MONSTER", 240, 270);
+  text("BABY MONSTER", 165, 270);
+  textSize(42);
+  text("press SPACE to start", 200, 350);
 }
 // game screen
 function gameScreen() {
@@ -726,7 +728,7 @@ function failScreen() {
   textInfoFail();
 }
 
-let state = "fail";
+let state = "start";
 
 // press spacebar to start game from start, game and win screen
 function draw() {
