@@ -211,7 +211,7 @@ function monsterMamaStart() {
 
 // Screens
 
-// start screens
+// start screen
 function startScreen() {
   image(treeImg, 0, 0, 0, 0);
   babyMonsterStart();
@@ -224,6 +224,20 @@ function startScreen() {
   text("BABY MONSTER", 240, 270);
 }
 
+// game screen
+function gameScreen() {}
+
+let state = "start";
+
 function draw() {
-  startScreen();
+  // state switch
+  if (state === "start") {
+    startScreen();
+  } else if (state === "game") {
+    gameScreen();
+  } else if (state === "win") {
+    winScreen();
+  } else if (state === "fail") {
+    failScreen();
+  }
 }
