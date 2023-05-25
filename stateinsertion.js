@@ -606,15 +606,17 @@ function monsterMamaWin() {
 function info() {
   stroke(220, 220, 240, 180);
   fill(230, 255, 240, 180);
-  rect(250, 100, 300, 200, 20);
+  rect(250, 100, 300, 150, 20);
 }
 
 // text shown when player wins game
 function textInfoWin() {
-  textSize(10);
+  textSize(15);
+  strokeWeight(2);
   stroke(0, 0, 0);
-  fill(255, 255, 255);
-  text("Thank you for helping me find my mama. ", 240, 270);
+  fill(230, 255, 255);
+  text("Thank you for helping me find my mama. ", 265, 150);
+  text("Press space to play again ❤️ ", 265, 200);
 }
 
 // baby monster failing screen layout
@@ -671,15 +673,16 @@ function babyMonsterFail() {
 // text shown when player fails game
 function textInfoFail() {
   textSize(15);
-  noStroke();
-  fill(20, 20, 20);
+  strokeWeight(2);
+  stroke(0, 0, 0);
+  fill(230, 255, 255);
   text(
-    "You did not help baby monster, he has to sleep in the woods tonight.",
-    300,
-    120,
-    200
+    "Baby monster is still lost, will he ever find his mama again? ",
+    265,
+    130,
+    280
   );
-  text(">> Will you try to help me home again?<<", 300, 220, 200);
+  text("Press space to retry ", 320, 200);
 }
 
 // Screens
@@ -723,7 +726,7 @@ function failScreen() {
   textInfoFail();
 }
 
-let state = "win";
+let state = "fail";
 
 // press spacebar to start game from start, game and win screen
 function draw() {
@@ -735,7 +738,7 @@ function draw() {
     state = "game";
   }
 
-  // state switch
+  // state display
   if (state === "start") {
     startScreen();
   } else if (state === "game") {
