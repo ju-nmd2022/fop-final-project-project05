@@ -729,6 +729,7 @@ function failScreen() {
 }
 
 let state = "start";
+let gameTimer = 0;
 
 // press spacebar to start game from start, game and win screen
 function draw() {
@@ -745,6 +746,11 @@ function draw() {
     startScreen();
   } else if (state === "game") {
     gameScreen();
+    gameTimer = gameTimer + 1;
+    if (gameTimer >= 100) {
+      gameTimer = 0;
+      state = "fail";
+    }
   } else if (state === "win") {
     winScreen();
   } else if (state === "fail") {
