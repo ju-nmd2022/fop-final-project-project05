@@ -247,8 +247,6 @@ function babyMonsterStart() {
 // mama monster start screen
 function monsterMamaStart() {
   //MAMA MONSTER
-  fill(30, 50, 30);
-  rect(245, 300, 345, 90);
   //Arms
 
   // //Left
@@ -684,6 +682,16 @@ function textInfoFail() {
   text(">> Will you try to help me home again?<<", 300, 220, 200);
 }
 
+// value for button play
+
+// play button layout
+function play() {
+  let playButton;
+  playButton = createButton("click me");
+  playButton.position(400, 300);
+  playButton.mousePressed(playBtn);
+}
+
 // Screens
 
 // start screen
@@ -691,6 +699,7 @@ function startScreen() {
   image(treeImg, 0, 0, 0, 0);
   babyMonsterStart();
   monsterMamaStart();
+  play();
 
   // text
   textSize(45);
@@ -725,7 +734,11 @@ function failScreen() {
   textInfoFail();
 }
 
-let state = "fail";
+let state = "start";
+
+function playBtn() {
+  state = "game";
+}
 
 function draw() {
   // state switch
