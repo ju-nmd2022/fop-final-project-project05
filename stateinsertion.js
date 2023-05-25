@@ -1,3 +1,8 @@
+// import class
+import MonsterMamaRun from "./mama-run.js";
+// mama monster object start screen
+let mamaRun = new MonsterMamaRun(100, 100);
+
 // load images for screen backgrounds
 let treeImg;
 let scaryImg;
@@ -18,6 +23,7 @@ function preload() {
   sunImg = loadImage("img/sunset.png");
   playerImg = loadImage("img/babymonster.png");
 }
+window.preload = preload;
 
 // the tile-map set up - is going to be exported
 const map = [
@@ -173,9 +179,9 @@ const map = [
 
 function setup() {
   createCanvas(800, 600);
-  // frameRate(18);
-  // playerImg = loadImage("img/babymonster.png");
 }
+
+window.setup = setup;
 
 //   baby monster start screen
 function babyMonsterStart() {
@@ -245,129 +251,6 @@ function babyMonsterStart() {
 }
 
 // mama monster start screen
-function monsterMamaStart() {
-  //MAMA MONSTER
-  //Arms
-
-  // //Left
-
-  fill(190, 155, 202);
-  stroke(125, 69, 113);
-  strokeWeight(5);
-  // beginShape();
-  // curveVertex(522, 277);
-  // curveVertex(522, 277);
-  // curveVertex(537, 203);
-  // curveVertex(567, 215);
-  // curveVertex(563, 261);
-  // curveVertex(540, 300);
-  // curveVertex(540, 300);
-  // endShape();
-
-  ellipse(35, 350, 30, 100);
-  ellipse(180, 350, 30, 100);
-
-  //Right
-
-  // fill(190, 155, 202);
-  // stroke(125, 69, 113);
-  // strokeWeight(5);
-  // beginShape();
-  // curveVertex(409, 277);
-  // curveVertex(409, 277);
-  // curveVertex(399, 203);
-  // curveVertex(366, 215);
-  // curveVertex(371, 261);
-  // curveVertex(403, 300);
-  // curveVertex(403, 300);
-  // endShape();
-
-  //Body
-  fill(190, 155, 202);
-  stroke(125, 69, 113);
-  strokeWeight(7);
-  rect(40, 300, 140, 170, 80);
-
-  //eyes
-
-  //whites
-
-  fill(255, 255, 255);
-  noStroke();
-  ellipse(75, 355, 30, 30);
-
-  fill(255, 255, 255);
-  noStroke();
-  ellipse(140, 355, 30, 30);
-
-  //iris
-
-  fill(24, 24, 24);
-  noStroke();
-  ellipse(80, 350, 10, 10);
-
-  fill(24, 24, 24);
-  noStroke();
-  ellipse(145, 350, 10, 10);
-
-  //Nose
-
-  fill(208, 128, 190);
-  noStroke();
-  ellipse(102, 380, 40, 20);
-
-  //nostrils
-
-  //right
-
-  push();
-  fill(177, 78, 155);
-  noStroke();
-  translate(100, 386);
-  rotate(PI / 8);
-  ellipse(10, -3, 18, 8);
-  pop();
-
-  //left
-
-  push();
-  fill(177, 78, 155);
-  noStroke();
-  translate(65, 370);
-  rotate(PI / -8);
-  ellipse(28, 10, 18, 8);
-  pop();
-
-  //Mouth
-
-  fill(156, 37, 87);
-  noStroke();
-  ellipse(95, 410, 35, 35);
-
-  push();
-  angleMode(DEGREES);
-  fill(255, 255, 255);
-  noStroke();
-  translate(90, 420);
-  rotate(30);
-  ellipse(0, 0, 25, 13);
-  pop();
-
-  //Legs
-
-  //right leg
-
-  fill(190, 155, 202);
-  stroke(125, 69, 113);
-  strokeWeight(6);
-  ellipse(79, 475, 25, 25);
-
-  //Left leg
-  fill(190, 155, 202);
-  stroke(125, 69, 113);
-  strokeWeight(6);
-  ellipse(134, 480, 25, 25);
-}
 
 // draw statements for the tilemap
 function drawMap() {
@@ -691,8 +574,6 @@ function textInfoFail() {
 function startScreen() {
   image(treeImg, 0, 0, 0, 0);
   babyMonsterStart();
-  monsterMamaStart();
-
   // text
   textSize(60);
   stroke(0, 0, 0);
@@ -753,6 +634,8 @@ function draw() {
   // state display
   if (state === "start") {
     startScreen();
+    mamaRun.draw();
+    mamaRun.x += 0.2;
   } else if (state === "game") {
     gameScreen();
     gameTimer = gameTimer + 1;
@@ -766,3 +649,5 @@ function draw() {
     failScreen();
   }
 }
+window.draw = draw;
+mamaRun.draw;

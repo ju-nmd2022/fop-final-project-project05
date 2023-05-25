@@ -1,4 +1,6 @@
-class MonsterMamaRun {
+// code inspired from Garrits tutorial about classes
+
+export default class MonsterMamaRun {
   constructor(x, y) {
     this.x = x;
     this.y = y;
@@ -14,33 +16,9 @@ class MonsterMamaRun {
     fill(190, 155, 202);
     stroke(125, 69, 113);
     strokeWeight(5);
-    // beginShape();
-    // curveVertex(522, 277);
-    // curveVertex(522, 277);
-    // curveVertex(537, 203);
-    // curveVertex(567, 215);
-    // curveVertex(563, 261);
-    // curveVertex(540, 300);
-    // curveVertex(540, 300);
-    // endShape();
 
     ellipse(this.x - 65, this.y + 245, 30, 100);
     ellipse(this.x + 85, this.y + 245, 30, 100);
-
-    //Right
-
-    // fill(190, 155, 202);
-    // stroke(125, 69, 113);
-    // strokeWeight(5);
-    // beginShape();
-    // curveVertex(409, 277);
-    // curveVertex(409, 277);
-    // curveVertex(399, 203);
-    // curveVertex(366, 215);
-    // curveVertex(371, 261);
-    // curveVertex(403, 300);
-    // curveVertex(403, 300);
-    // endShape();
 
     //Body
     fill(190, 155, 202);
@@ -128,12 +106,4 @@ class MonsterMamaRun {
     strokeWeight(6);
     ellipse(this.x + 35, this.y + 380, 25, 25);
   }
-}
-
-let mamaRun = new MonsterMamaRun(100, 100);
-
-function draw() {
-  clear();
-  mamaRun.draw();
-  mamaRun.x += 1;
 }
