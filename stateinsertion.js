@@ -719,6 +719,7 @@ function winScreen() {
   monsterMamaWin();
   info();
   textInfoWin();
+  clear();
 }
 
 // fail screen
@@ -729,7 +730,7 @@ function failScreen() {
   textInfoFail();
 }
 
-let state = "win";
+let state = "start";
 let gameTimer = 0;
 
 // timer layout
@@ -749,13 +750,18 @@ function draw() {
     state = "game";
   }
 
+  // how to win the game
+  if (playerX === mamaX && playerY === mamaY) {
+    state = "win";
+  }
+
   // state display
   if (state === "start") {
     startScreen();
   } else if (state === "game") {
     gameScreen();
     gameTimer = gameTimer + 1;
-    if (gameTimer >= 100) {
+    if (gameTimer >= 300) {
       gameTimer = 0;
       state = "fail";
     }
