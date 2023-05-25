@@ -1,3 +1,13 @@
+let treeImg;
+let scaryImg;
+let sunImg;
+
+function preload() {
+  treeImg = loadImage("img/tree.png");
+  scaryImg = loadImage("img/scary.png");
+  sunImg = loadImage("img/sunset.png");
+}
+
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
