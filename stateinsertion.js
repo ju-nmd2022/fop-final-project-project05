@@ -248,6 +248,46 @@ function babyMonsterStart() {
   strokeWeight(6);
   bezier(22, 25, 80, -100, -80, 0, 0, -20);
   pop();
+
+  //right ear
+  angleMode(DEGREES);
+  push();
+  translate(590, 90);
+  fill(208, 128, 190);
+  noStroke();
+  rotate(100);
+  rect(0, 0, 15, 120, 6);
+  pop();
+
+  //ear flapp
+  angleMode(DEGREES);
+  push();
+  translate(465, 80);
+  rotate(-70);
+  fill(208, 128, 190);
+  noStroke();
+  rect(0, 0, 69, 15, 5);
+  pop();
+
+  //left ear
+  angleMode(DEGREES);
+  push();
+  fill(208, 128, 185);
+  noStroke();
+  translate(700, 230);
+  rotate(15);
+  rect(0, 0, 15, 120, 6);
+  pop();
+
+  //ear flapp
+  angleMode(DEGREES);
+  push();
+  fill(208, 128, 190);
+  noStroke();
+  translate(684, 315);
+  rotate(-20);
+  rect(-25, 21, 69, 15, 5);
+  pop();
 }
 
 // mama monster start screen
