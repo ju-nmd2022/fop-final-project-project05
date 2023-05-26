@@ -24,7 +24,7 @@ function preload() {
   mamaImg = loadImage("img/mama1.png");
 }
 
-// the tile-map set up - is going to be exported
+// the tile-map set up
 const map = [
   [
     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
@@ -180,10 +180,9 @@ function setup() {
   createCanvas(800, 600);
   frameRate(25);
   generateCoins(80);
-  // playerImg = loadImage("img/babymonster.png");
 }
 
-//   baby monster start screen
+//   baby monster layout for start screen
 function babyMonsterStart() {
   //BABY MONSTER
 
@@ -290,7 +289,7 @@ function babyMonsterStart() {
   pop();
 }
 
-// mama monster start screen
+// mama monster layout for start screen
 function monsterMamaStart() {
   //MAMA MONSTER
   //Arms
@@ -412,6 +411,8 @@ function drawMap() {
 }
 
 // characther draw
+
+// baby monster
 function drawPlayer() {
   image(
     playerImg,
@@ -422,6 +423,7 @@ function drawPlayer() {
   );
 }
 
+// mama monster
 function drawmama() {
   image(
     mamaImg,
@@ -536,6 +538,7 @@ function checkCollision() {
   }
 }
 
+// inspired by the particle example provided by Garrit
 let starU = [];
 let starZ = [];
 
@@ -655,7 +658,7 @@ function monsterMamaWin() {
   ellipse(400, 450, 30, 100);
 }
 
-// info box for winning and failing screen
+// info text-box for winning and failing screen
 function info() {
   stroke(220, 220, 240, 180);
   fill(230, 255, 240, 180);
@@ -802,7 +805,7 @@ function textInfoFail() {
   text("Press space to retry ", 320, 200);
 }
 
-// Screens
+// Screens, code inspired by Garrits video about state switches.
 
 function reset() {
   playerX = 1;
@@ -910,7 +913,7 @@ function draw() {
     state = "win";
   }
 
-  // state display
+  // state display if statements
   if (state === "start") {
     startScreen();
   } else if (state === "game") {
