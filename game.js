@@ -181,7 +181,6 @@ const map = [
 
 function setup() {
   createCanvas(800, 600);
-  frameRate(25);
   generateCoins(80);
 }
 
@@ -905,7 +904,7 @@ function draw() {
   } else if (state === "game") {
     gameScreen();
     gameTimer = gameTimer + 1;
-    if (gameTimer >= 300) {
+    if (gameTimer >= 250) {
       gameTimer = 0;
       state = "fail";
     }
