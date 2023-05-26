@@ -300,33 +300,10 @@ function monsterMamaStart() {
   fill(190, 155, 202);
   stroke(125, 69, 113);
   strokeWeight(5);
-  // beginShape();
-  // curveVertex(522, 277);
-  // curveVertex(522, 277);
-  // curveVertex(537, 203);
-  // curveVertex(567, 215);
-  // curveVertex(563, 261);
-  // curveVertex(540, 300);
-  // curveVertex(540, 300);
-  // endShape();
 
   ellipse(35, 350, 30, 100);
-  ellipse(180, 350, 30, 100);
-
   //Right
-
-  // fill(190, 155, 202);
-  // stroke(125, 69, 113);
-  // strokeWeight(5);
-  // beginShape();
-  // curveVertex(409, 277);
-  // curveVertex(409, 277);
-  // curveVertex(399, 203);
-  // curveVertex(366, 215);
-  // curveVertex(371, 261);
-  // curveVertex(403, 300);
-  // curveVertex(403, 300);
-  // endShape();
+  ellipse(180, 350, 30, 100);
 
   //Body
   fill(190, 155, 202);
@@ -604,6 +581,46 @@ function babyMonsterWin() {
   stroke(177, 78, 155);
   strokeWeight(5);
   ellipse(320, 455, 40, 10);
+
+  //right ear
+  angleMode(DEGREES);
+  push();
+  translate(375, 345);
+  fill(208, 128, 190);
+  noStroke();
+  rotate(60);
+  rect(0, 0, 5, 60, 6);
+  pop();
+
+  //ear flapp
+  angleMode(DEGREES);
+  push();
+  translate(375, 345);
+  rotate(30);
+  fill(208, 128, 190);
+  noStroke();
+  rect(0, 0, 15, 5, 5);
+  pop();
+
+  //left ear
+  angleMode(DEGREES);
+  push();
+  fill(208, 128, 185);
+  noStroke();
+  translate(230, 340);
+  rotate(-45);
+  rect(0, 0, 5, 60, 6);
+  pop();
+
+  // right ear flapp
+  angleMode(DEGREES);
+  push();
+  fill(208, 128, 190);
+  noStroke();
+  translate(220, 345);
+  rotate(-30);
+  rect(0, 0, 15, 5, 5);
+  pop();
 }
 
 // monster mama for winning screen
@@ -626,6 +643,16 @@ function monsterMamaWin() {
   stroke(125, 69, 113);
   strokeWeight(6);
   ellipse(430, 490, 25, 25);
+
+  //Arms
+
+  // //Left
+
+  fill(190, 155, 202);
+  stroke(125, 69, 113);
+  strokeWeight(5);
+
+  ellipse(400, 450, 30, 100);
 }
 
 // info box for winning and failing screen
@@ -798,6 +825,13 @@ function startScreen() {
   text("BABY MONSTER", 165, 270);
   textSize(42);
   text("press SPACE to start", 200, 350);
+  textSize(15);
+  text(
+    "Help the baby monster and collect the coins and find his mama before the time runs out",
+    250,
+    400,
+    300
+  );
 }
 // game screen
 function gameScreen() {
