@@ -825,6 +825,13 @@ function startScreen() {
   text("BABY MONSTER", 165, 270);
   textSize(42);
   text("press SPACE to start", 200, 350);
+  textSize(15);
+  text(
+    "Help the baby monster and collect the coins and find his mama before the time runs out",
+    250,
+    400,
+    300
+  );
 }
 // game screen
 function gameScreen() {
