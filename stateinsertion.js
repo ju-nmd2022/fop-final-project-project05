@@ -7,14 +7,18 @@ let mamaRun = new MonsterMamaRun(100, 100);
 let treeImg;
 let scaryImg;
 let sunImg;
+let mamaImg;
 
 //game values
 let playerX = 1;
 let playerY = 2;
 let playerImg;
 const tileSize = 20;
-let mamaX = 350;
-let mamaY = 312;
+let mamaX = 37;
+let mamaY = 26;
+
+let coinCount = 0; // Variable to store the number of collected coins
+let coins = []; // Array to store the coin objects
 
 // image load for p5canvas.js
 function preload() {
@@ -22,163 +26,168 @@ function preload() {
   scaryImg = loadImage("img/scary.png");
   sunImg = loadImage("img/sunset.png");
   playerImg = loadImage("img/babymonster.png");
+  mamaImg = loadImage("img/mama1.png");
 }
+
 window.preload = preload;
 
 // the tile-map set up - is going to be exported
 const map = [
   [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
   ],
 
   [
-    0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,
+    1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+    2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1,
   ],
 
   [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0,
+    1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 1, 2, 0, 0, 0, 0, 0, 0, 1, 2, 0, 1, 2, 1,
   ],
 
   [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0,
+    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1,
+    0, 1, 2, 0, 1, 1, 0, 0, 0, 1, 2, 0, 1, 2, 1,
   ],
 
   [
-    0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1,
-    0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0,
+    1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 1, 2, 2, 2, 2,
+    0, 1, 2, 0, 1, 2, 0, 0, 0, 1, 2, 0, 1, 2, 1,
   ],
 
   [
-    0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1,
-    0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0,
+    1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 0, 1, 2,
+    0, 1, 2, 0, 1, 2, 0, 0, 0, 1, 2, 0, 1, 2, 1,
   ],
 
   [
-    0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1,
-    0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0,
+    1, 2, 1, 1, 2, 0, 1, 2, 0, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 2, 0, 1, 2,
+    0, 1, 2, 0, 1, 2, 0, 0, 0, 1, 2, 0, 1, 2, 1,
   ],
 
   [
-    0, 1, 1, 1, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 1,
-    0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0,
+    1, 2, 2, 2, 2, 0, 1, 2, 0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 1, 2, 0, 1, 2,
+    1, 1, 2, 0, 1, 2, 0, 0, 0, 1, 2, 0, 1, 2, 1,
   ],
 
   [
-    0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1,
-    1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0,
+    1, 2, 0, 0, 0, 0, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 0, 1, 2,
+    2, 2, 2, 0, 1, 2, 0, 0, 0, 0, 0, 0, 1, 2, 1,
   ],
 
   [
-    0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0,
-    0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0,
+    1, 2, 1, 1, 1, 1, 1, 2, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 2, 0, 0, 0,
+    0, 0, 0, 0, 1, 2, 0, 1, 1, 1, 1, 1, 1, 2, 1,
   ],
 
   [
-    0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0,
-    0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0,
+    1, 2, 2, 2, 2, 2, 2, 2, 0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 1, 2, 0, 1, 1,
+    1, 1, 1, 0, 1, 2, 0, 1, 2, 2, 2, 2, 2, 2, 1,
   ],
 
   [
-    0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1,
-    1, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0,
+    1, 2, 0, 0, 0, 0, 1, 2, 0, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 0, 1, 2,
+    2, 2, 2, 0, 1, 2, 0, 1, 2, 0, 0, 0, 1, 2, 1,
   ],
 
   [
-    0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1,
-    0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0,
+    1, 2, 0, 1, 1, 0, 1, 2, 1, 1, 2, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 1, 2,
+    0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 0, 0, 1, 2, 1,
   ],
 
   [
-    0, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1,
-    0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0,
+    1, 2, 0, 1, 2, 0, 1, 2, 2, 2, 2, 0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 1, 2,
+    0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 0, 0, 1, 2, 1,
   ],
 
   [
-    0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1,
-    0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0,
+    1, 2, 0, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 1, 2,
+    0, 1, 2, 0, 1, 2, 0, 1, 2, 1, 1, 0, 1, 2, 1,
   ],
 
   [
-    0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1,
-    0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 1, 0, 0, 1, 0,
+    1, 2, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 2, 0, 1, 2,
+    0, 1, 2, 0, 1, 2, 0, 1, 2, 2, 2, 0, 1, 2, 1,
   ],
 
   [
-    0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1,
-    0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0,
+    1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 1, 2, 2, 2, 2, 2, 2, 0, 1, 2,
+    0, 0, 0, 0, 1, 2, 0, 0, 0, 1, 2, 0, 1, 2, 1,
   ],
 
   [
-    0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-    0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0,
+    1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2,
+    0, 1, 1, 0, 1, 2, 1, 1, 1, 1, 2, 0, 1, 2, 1,
   ],
 
   [
-    0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-    0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0,
+    1, 2, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 2,
+    0, 1, 2, 0, 1, 2, 2, 2, 2, 2, 2, 0, 1, 2, 1,
   ],
 
   [
-    0, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1,
-    0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0,
+    1, 2, 0, 1, 2, 2, 2, 2, 0, 1, 2, 2, 2, 2, 2, 2, 0, 1, 2, 2, 2, 2, 0, 1, 2,
+    0, 1, 2, 0, 0, 0, 0, 0, 0, 1, 2, 0, 1, 2, 1,
   ],
 
   [
-    0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1,
-    0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0,
+    1, 2, 0, 1, 2, 0, 1, 2, 0, 0, 0, 0, 0, 0, 1, 2, 0, 1, 2, 0, 0, 0, 0, 1, 2,
+    0, 1, 2, 0, 1, 1, 1, 1, 0, 1, 2, 0, 1, 2, 1,
   ],
 
   [
-    0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1,
-    0, 0, 1, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 1, 0,
+    1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 1, 1, 1, 1, 1, 2, 0, 1, 2, 1, 1, 1, 0, 1, 2,
+    0, 1, 2, 0, 1, 2, 2, 2, 0, 1, 2, 0, 1, 2, 1,
   ],
 
   [
-    0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1,
-    0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0,
+    1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 2, 2, 2, 2, 2, 0, 1, 2, 2, 2, 2, 0, 1, 2,
+    0, 1, 2, 0, 1, 2, 0, 0, 0, 1, 2, 0, 1, 2, 1,
   ],
 
   [
-    0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-    0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0,
+    1, 2, 0, 1, 2, 0, 0, 0, 0, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2,
+    0, 1, 2, 0, 1, 2, 0, 0, 0, 0, 0, 0, 1, 2, 1,
   ],
 
   [
-    0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-    0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0,
+    1, 2, 0, 1, 2, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 2,
+    0, 1, 2, 1, 1, 2, 0, 1, 1, 1, 1, 1, 1, 2, 1,
   ],
 
   [
-    0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1,
-    0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0,
+    1, 2, 0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 1, 2, 2, 2, 2, 2, 2, 2,
+    0, 1, 2, 2, 2, 2, 0, 1, 2, 2, 2, 2, 2, 2, 1,
   ],
 
   [
-    0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 0, 1, 2, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 1, 2, 0, 0, 0, 0, 1, 1, 1, 1, 1,
   ],
 
   [
-    0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 2, 1, 1, 1, 1, 1, 1,
+    1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1,
   ],
 
   [
-    0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,
+    1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+    2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1,
   ],
   [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
   ],
 ];
 
 function setup() {
   createCanvas(800, 600);
+  //frameRate(25);
+  generateCoins(80);
+  // playerImg = loadImage("img/babymonster.png");
 }
 
 window.setup = setup;
@@ -248,49 +257,132 @@ function babyMonsterStart() {
   strokeWeight(6);
   bezier(22, 25, 80, -100, -80, 0, 0, -20);
   pop();
-
-  //right ear
-  angleMode(DEGREES);
-  push();
-  translate(590, 90);
-  fill(208, 128, 190);
-  noStroke();
-  rotate(100);
-  rect(0, 0, 15, 120, 6);
-  pop();
-
-  //ear flapp
-  angleMode(DEGREES);
-  push();
-  translate(465, 80);
-  rotate(-70);
-  fill(208, 128, 190);
-  noStroke();
-  rect(0, 0, 69, 15, 5);
-  pop();
-
-  //left ear
-  angleMode(DEGREES);
-  push();
-  fill(208, 128, 185);
-  noStroke();
-  translate(700, 230);
-  rotate(15);
-  rect(0, 0, 15, 120, 6);
-  pop();
-
-  //ear flapp
-  angleMode(DEGREES);
-  push();
-  fill(208, 128, 190);
-  noStroke();
-  translate(684, 315);
-  rotate(-20);
-  rect(-25, 21, 69, 15, 5);
-  pop();
 }
 
 // mama monster start screen
+function monsterMamaStart() {
+  //MAMA MONSTER
+  //Arms
+
+  // //Left
+
+  fill(190, 155, 202);
+  stroke(125, 69, 113);
+  strokeWeight(5);
+  // beginShape();
+  // curveVertex(522, 277);
+  // curveVertex(522, 277);
+  // curveVertex(537, 203);
+  // curveVertex(567, 215);
+  // curveVertex(563, 261);
+  // curveVertex(540, 300);
+  // curveVertex(540, 300);
+  // endShape();
+
+  ellipse(35, 350, 30, 100);
+  ellipse(180, 350, 30, 100);
+
+  //Right
+
+  // fill(190, 155, 202);
+  // stroke(125, 69, 113);
+  // strokeWeight(5);
+  // beginShape();
+  // curveVertex(409, 277);
+  // curveVertex(409, 277);
+  // curveVertex(399, 203);
+  // curveVertex(366, 215);
+  // curveVertex(371, 261);
+  // curveVertex(403, 300);
+  // curveVertex(403, 300);
+  // endShape();
+
+  //Body
+  fill(190, 155, 202);
+  stroke(125, 69, 113);
+  strokeWeight(7);
+  rect(40, 300, 140, 170, 80);
+
+  //eyes
+
+  //whites
+
+  fill(255, 255, 255);
+  noStroke();
+  ellipse(75, 355, 30, 30);
+
+  fill(255, 255, 255);
+  noStroke();
+  ellipse(140, 355, 30, 30);
+
+  //iris
+
+  fill(24, 24, 24);
+  noStroke();
+  ellipse(80, 350, 10, 10);
+
+  fill(24, 24, 24);
+  noStroke();
+  ellipse(145, 350, 10, 10);
+
+  //Nose
+
+  fill(208, 128, 190);
+  noStroke();
+  ellipse(102, 380, 40, 20);
+
+  //nostrils
+
+  //right
+
+  push();
+  fill(177, 78, 155);
+  noStroke();
+  translate(100, 386);
+  rotate(PI / 8);
+  ellipse(10, -3, 18, 8);
+  pop();
+
+  //left
+
+  push();
+  fill(177, 78, 155);
+  noStroke();
+  translate(65, 370);
+  rotate(PI / -8);
+  ellipse(28, 10, 18, 8);
+  pop();
+
+  //Mouth
+
+  fill(156, 37, 87);
+  noStroke();
+  ellipse(95, 410, 35, 35);
+
+  push();
+  angleMode(DEGREES);
+  fill(255, 255, 255);
+  noStroke();
+  translate(90, 420);
+  rotate(30);
+  ellipse(0, 0, 25, 13);
+  pop();
+
+  //Legs
+
+  //right leg
+
+  fill(190, 155, 202);
+  stroke(125, 69, 113);
+  strokeWeight(6);
+  ellipse(79, 475, 25, 25);
+
+  //Left leg
+  fill(190, 155, 202);
+  stroke(125, 69, 113);
+  strokeWeight(6);
+  ellipse(134, 480, 25, 25);
+}
 
 // draw statements for the tilemap
 function drawMap() {
@@ -298,10 +390,14 @@ function drawMap() {
     for (let x = 0; x < map[y].length; x++) {
       if (map[y][x] === 1) {
         noStroke();
+        fill(83, 73, 73);
+      } else if (map[y][x] === 2) {
+        noStroke();
         fill(111, 153, 86);
       } else {
         fill(83, 73, 73);
       }
+
       rect(x * tileSize, y * tileSize, tileSize, tileSize);
     }
   }
@@ -318,160 +414,115 @@ function drawPlayer() {
   );
 }
 
-// characther movement
+function drawmama() {
+  image(
+    mamaImg,
+    mamaX * tileSize,
+    mamaY * tileSize,
+    tileSize * 2,
+    tileSize * 2
+  );
+}
+
+function drawCoins() {
+  for (let i = 0; i < coins.length; i++) {
+    const coin = coins[i];
+    if (map[coin.y][coin.x] <= 0) {
+      // Only draw the coin if it's on a tile with a value of 1 or lower
+      drawCoin(coin.x, coin.y);
+    }
+  }
+}
+
+//style of coin
+function drawCoin(x, y) {
+  // Draw the coin at the specified location
+  const coinSize = 13;
+  const coinX = x * tileSize + coinSize;
+  const coinY = y * tileSize + coinSize;
+  fill(255, 215, 0); // Yellow color
+  ellipse(coinX, coinY, coinSize, coinSize);
+}
+
+//style and draw coin cunter
+function drawCoinCounter() {
+  fill(0);
+  textSize(15);
+  text(`Coins: ${coinCount}`, 25, 34);
+}
+
 function movePlayer() {
   if (keyIsDown(37)) {
     if (
       playerX > 0 &&
-      map[playerY][playerX - 1] === 0 &&
-      map[playerY + 1][playerX - 1] === 0
+      map[playerY][playerX - 1] <= 1 &&
+      map[playerY + 1][playerX - 1] <= 1
     ) {
       playerX--;
     }
   } else if (keyIsDown(39)) {
     if (
       playerX < map[0].length - 2 &&
-      map[playerY][playerX + 2] === 0 &&
-      map[playerY + 1][playerX + 2] === 0
+      map[playerY][playerX + 2] <= 1 &&
+      map[playerY + 1][playerX + 2] <= 1
     ) {
       playerX++;
     }
   } else if (keyIsDown(38)) {
     if (
       playerY > 0 &&
-      map[playerY - 1][playerX] === 0 &&
-      map[playerY - 1][playerX + 1] === 0
+      map[playerY - 1][playerX] <= 1 &&
+      map[playerY - 1][playerX + 1] <= 1
     ) {
       playerY--;
     }
   } else if (keyIsDown(40)) {
     if (
       playerY < map.length - 2 &&
-      map[playerY + 2][playerX] === 0 &&
-      map[playerY + 2][playerX + 1] === 0
+      map[playerY + 2][playerX] <= 1 &&
+      map[playerY + 2][playerX + 1] <= 1
     ) {
       playerY++;
     }
   }
 }
 
-// monstermama at the goal , the drawn version
-
-function monsterMamaGame() {
-  push();
-
-  translate(mamaX, mamaY);
-
-  //Arms
-
-  //Left
-
-  fill(190, 155, 202);
-  stroke(125, 69, 113);
-  strokeWeight(1.5);
-  ellipse(429, 229, 7, 7);
-
-  //Right
-
-  fill(190, 155, 202);
-  stroke(125, 69, 113);
-  strokeWeight(1.5);
-  ellipse(398, 228, 7, 7);
-
-  //Body
-  fill(190, 155, 202);
-  stroke(125, 69, 113);
-  strokeWeight(3);
-  rect(401, 210, 25, 30, 30);
-
-  //eyes
-
-  //whites
-
-  fill(255, 255, 255);
-  noStroke();
-  ellipse(410, 220, 5, 5);
-
-  fill(255, 255, 255);
-  noStroke();
-  ellipse(418, 220, 5, 5);
-
-  //iris
-
-  fill(24, 24, 24);
-  noStroke();
-  ellipse(411, 220, 2, 2);
-
-  fill(24, 24, 24);
-  noStroke();
-  ellipse(417, 220, 2, 2);
-
-  //Nose
-
-  fill(208, 128, 190);
-  noStroke();
-  ellipse(414, 228, 8, 4);
-
-  //nostrils
-
-  //left
-
-  push();
-  fill(177, 78, 155);
-  noStroke();
-  translate(401, 227);
-  rotate(PI / 8);
-  ellipse(10, -3, 3.5, 2);
-  pop();
-
-  //right
-
-  push();
-  fill(177, 78, 155);
-  noStroke();
-  translate(385, 227);
-  rotate(PI / -8);
-  ellipse(28, 13, 3.5, 2);
-  pop();
-
-  //Mouth
-
-  fill(156, 37, 87);
-  noStroke();
-  ellipse(416, 233.5, 5, 5);
-
-  push();
-  fill(255, 255, 255);
-  noStroke();
-  translate(416.5, 234.5);
-  rotate(PI / -8);
-  ellipse(0, 0, 4, 2);
-  pop();
-
-  //Legs
-
-  //right leg
-
-  fill(190, 155, 202);
-  stroke(125, 69, 113);
-  strokeWeight(2);
-  ellipse(406, 242, 8, 8);
-
-  //Left leg
-  fill(190, 155, 202);
-  stroke(125, 69, 113);
-  strokeWeight(2);
-  ellipse(420, 242, 8, 8);
-  pop();
+function generateCoins(numCoins) {
+  for (let i = 0; i < numCoins; i++) {
+    let coinPlaced = false;
+    while (!coinPlaced) {
+      let x = Math.floor(Math.random() * map[0].length);
+      let y = Math.floor(Math.random() * map.length);
+      if (map[y][x] <= 1) {
+        coins.push({ x: x, y: y });
+        coinPlaced = true;
+      }
+    }
+  }
 }
+
+// function for collecting the coins
+function collectCoin() {
+  for (let i = 0; i < coins.length; i++) {
+    const coin = coins[i];
+    if (coin.x === playerX && coin.y === playerY) {
+      // Collect the coin if the player's position matches the coin's position
+      coins.splice(i, 1); // Remove the coin from the array
+      coinCount++; // Increment the coin count
+      break;
+    }
+  }
+}
+
+// monstermama at the goal , the drawn version
 
 // limit the charcther movement to the walls of the maze
 function checkCollision() {
   if (
-    map[playerY][playerX] === 1 ||
-    map[playerY][playerX + 1] === 1 ||
-    map[playerY + 1][playerX] === 1 ||
-    map[playerY + 1][playerX + 1] === 1
+    map[playerY][playerX] > 1 ||
+    map[playerY][playerX + 1] > 1 ||
+    map[playerY + 1][playerX] > 1 ||
+    map[playerY + 1][playerX + 1] > 1
   ) {
     console.log("Collision detected!");
   }
@@ -588,73 +639,9 @@ function babyMonsterFail() {
   noStroke();
   ellipse(320, 413, 45, 15);
 
-  //pacifier
-  stroke(7, 103, 192);
-  strokeWeight(2);
-
-  push();
-  translate(120, 120);
-  fill(54, 149, 236);
-  noStroke();
-  ellipse(196, 342, 15);
-
-  fill(54, 149, 236);
-  noStroke();
-  ellipse(206, 342, 15);
-
-  fill(7, 103, 192);
-  noStroke();
-  ellipse(201, 342, 15, 5);
-
-  noFill();
-  stroke(7, 103, 192);
-  strokeWeight(2);
-  bezier(195, 342, 199, 350, 201, 360, 206, 342);
-  pop();
-
   // tear
   fill(36, 166, 219);
-  ellipse(300, 450, 5, 15);
-
-  //right ear
-  angleMode(DEGREES);
-  push();
-  translate(375, 380);
-  fill(208, 128, 190);
-  noStroke();
-  rotate(65);
-  rect(0, 0, 5, 60, 6);
-  pop();
-
-  //ear flapp
-  angleMode(DEGREES);
-  push();
-  translate(330, 365);
-  rotate(30);
-  fill(208, 128, 190);
-  noStroke();
-  rect(0, 0, 15, 5, 5);
-  pop();
-
-  //left ear
-  angleMode(DEGREES);
-  push();
-  fill(208, 128, 185);
-  noStroke();
-  translate(330, 366);
-  rotate(40);
-  rect(0, 0, 5, 60, 6);
-  pop();
-
-  // right ear flapp
-  angleMode(DEGREES);
-  push();
-  fill(208, 128, 190);
-  noStroke();
-  translate(375, 380);
-  rotate(30);
-  rect(0, 0, 15, 5, 5);
-  pop();
+  ellipse(310, 460, 10, 20);
 }
 
 // text shown when player fails game
@@ -674,10 +661,19 @@ function textInfoFail() {
 
 // Screens
 
+function reset() {
+  playerX = 1;
+  playerY = 2;
+  coinCount = 0;
+  gameState = "start";
+}
+
 // start screen
 function startScreen() {
   image(treeImg, 0, 0, 0, 0);
   babyMonsterStart();
+  monsterMamaStart();
+
   // text
   textSize(60);
   stroke(0, 0, 0);
@@ -690,11 +686,32 @@ function startScreen() {
 function gameScreen() {
   frameRate(18);
   drawMap();
-  drawPlayer();
+  drawPlayer(playerX, playerY);
+  drawmama();
+  drawCoins();
+  drawCoin();
+  drawCoinCounter();
   movePlayer();
+  generateCoins();
+  collectCoin();
   checkCollision();
-  monsterMamaGame();
   timer();
+
+  for (let i = 0; i < coins.length; i++) {
+    if (
+      playerX === coins[i].x &&
+      playerY === coins[i].y &&
+      !coins[i].collected
+    ) {
+      coins[i].collected = true;
+      coinCount++;
+    }
+  }
+
+  // Check for win condition
+  if (playerX === mamaX && playerY === mamaY && coinCount === 5) {
+    state = "win";
+  }
 }
 
 // winnig screen yay
@@ -713,9 +730,10 @@ function failScreen() {
   babyMonsterFail();
   info();
   textInfoFail();
+  reset();
 }
 
-let state = "fail";
+let state = "start";
 let gameTimer = 0;
 
 // timer layout
@@ -735,11 +753,14 @@ function draw() {
     state = "game";
   }
 
+  // how to win the game
+  if (playerX === mamaX && playerY === mamaY) {
+    state = "win";
+  }
+
   // state display
   if (state === "start") {
     startScreen();
-    mamaRun.draw();
-    mamaRun.x += 0.2;
   } else if (state === "game") {
     gameScreen();
     gameTimer = gameTimer + 1;
@@ -753,5 +774,6 @@ function draw() {
     failScreen();
   }
 }
+
 window.draw = draw;
 mamaRun.draw;
