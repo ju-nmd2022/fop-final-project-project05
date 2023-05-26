@@ -519,6 +519,27 @@ function checkCollision() {
   }
 }
 
+let starU = [];
+let starZ = [];
+
+// Forloop creating stars and deciding random position
+for (let i = 0; i < 600; i++) {
+  const u = Math.floor(Math.random() * 800);
+  const z = Math.floor(Math.random() * 600);
+
+  starU.push(u);
+  starZ.push(z);
+}
+
+//look of stars
+function stars() {
+  noStroke();
+  fill(238, 161, 221);
+  for (let index in starU) {
+    ellipse(starU[index], starZ[index], 3);
+  }
+}
+
 // baby monster for winning screen layout
 function babyMonsterWin() {
   //BABY MONSTER
@@ -711,6 +732,7 @@ function winScreen() {
   image(sunImg, 0, 0, 0, 0);
   babyMonsterWin();
   monsterMamaWin();
+  stars();
   info();
   textInfoWin();
   reset();
