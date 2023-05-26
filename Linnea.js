@@ -1,4 +1,5 @@
 //BABY MONSTER
+background(0, 0, 0);
 
 //body
 fill(238, 161, 221);
