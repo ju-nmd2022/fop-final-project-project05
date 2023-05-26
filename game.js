@@ -1,16 +1,19 @@
-// load images for screen backgrounds
+// load images for screen for backgrounds and characters
 let treeImg;
 let scaryImg;
 let sunImg;
 let mamaImg;
+let playerImg;
 
 //game values
 let playerX = 1;
 let playerY = 2;
-let playerImg;
 const tileSize = 20;
 let mamaX = 37;
 let mamaY = 26;
+
+let state = "start";
+let gameTimer = 0;
 
 let coinCount = 0; // Variable to store the number of collected coins
 let coins = []; // Array to store the coin objects
@@ -434,19 +437,18 @@ function drawmama() {
   );
 }
 
+//draws coins on map but only if tile value is 0 or lower
 function drawCoins() {
   for (let i = 0; i < coins.length; i++) {
     const coin = coins[i];
     if (map[coin.y][coin.x] <= 0) {
-      // Only draw the coin if it's on a tile with a value of 1 or lower
       drawCoin(coin.x, coin.y);
     }
   }
 }
 
-//style of coin
+//style of coin and specific position
 function drawCoin(x, y) {
-  // Draw the coin at the specified location
   const coinSize = 13;
   const coinX = x * tileSize + coinSize;
   const coinY = y * tileSize + coinSize;
@@ -454,13 +456,14 @@ function drawCoin(x, y) {
   ellipse(coinX, coinY, coinSize, coinSize);
 }
 
-//style and draw coin cunter
+//style of Coin counter
 function drawCoinCounter() {
   textSize(20);
   fill(255, 255, 255);
   text(`Coins: ${coinCount}`, 20, 0, 200);
 }
 
+//Checks current position of player and sorunding tile values to see how the player can move
 function movePlayer() {
   if (keyIsDown(37)) {
     if (
@@ -497,6 +500,7 @@ function movePlayer() {
   }
 }
 
+//Randomly selects valid positions on the  map and places coins at those position
 function generateCoins(numCoins) {
   for (let i = 0; i < numCoins; i++) {
     let coinPlaced = false;
@@ -518,7 +522,7 @@ function collectCoin() {
     if (coin.x === playerX && coin.y === playerY) {
       // Collect the coin if the player's position matches the coin's position
       coins.splice(i, 1); // Remove the coin from the array
-      coinCount++; // Increment the coin count
+      coinCount++; // Incress the coin count, amount
       break;
     }
   }
@@ -560,7 +564,7 @@ function stars() {
   }
 }
 
-// baby monster for winning screen layout
+// Style baby monster for winning screen layout
 function babyMonsterWin() {
   //BABY MONSTER
 
@@ -626,7 +630,7 @@ function babyMonsterWin() {
   pop();
 }
 
-// monster mama for winning screen
+// Style monster mama for winning screen
 function monsterMamaWin() {
   //right leg
   fill(190, 155, 202);
@@ -675,7 +679,7 @@ function textInfoWin() {
   text("Press space to play again ❤️ ", 265, 200);
 }
 
-// baby monster failing screen layout
+// Style baby monster failing screen layout
 function babyMonsterFail() {
   //right foot
   fill(238, 161, 221);
@@ -807,6 +811,7 @@ function textInfoFail() {
 
 // Screens, code inspired by Garrits video about state switches.
 
+// resets some game functions, player start position, timer 0
 function reset() {
   playerX = 1;
   playerY = 2;
@@ -851,24 +856,13 @@ function gameScreen() {
   checkCollision();
   timer();
 
-  for (let i = 0; i < coins.length; i++) {
-    if (
-      playerX === coins[i].x &&
-      playerY === coins[i].y &&
-      !coins[i].collected
-    ) {
-      coins[i].collected = true;
-      coinCount++;
-    }
-  }
-
-  // Check for win condition
-  if (playerX === mamaX && playerY === mamaY && coinCount === 5) {
+  // Check for win condition to win
+  if (playerX === mamaX && playerY === mamaY) {
     state = "win";
   }
 }
 
-// winnig screen yay
+// winnig screen
 function winScreen() {
   image(sunImg, 0, 0, 0, 0);
   babyMonsterWin();
@@ -888,9 +882,6 @@ function failScreen() {
   reset();
 }
 
-let state = "start";
-let gameTimer = 0;
-
 // timer layout
 function timer() {
   textSize(20);
@@ -906,11 +897,6 @@ function draw() {
     state = "game";
   } else if (state === "fail" && keyIsDown(32)) {
     state = "game";
-  }
-
-  // how to win the game
-  if (playerX === mamaX && playerY === mamaY) {
-    state = "win";
   }
 
   // state display if statements
