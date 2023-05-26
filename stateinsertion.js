@@ -1,8 +1,3 @@
-// import class
-import MonsterMamaRun from "./mama-run.js";
-// mama monster object start screen
-let mamaRun = new MonsterMamaRun(100, 100);
-
 // load images for screen backgrounds
 let treeImg;
 let scaryImg;
@@ -28,8 +23,6 @@ function preload() {
   playerImg = loadImage("img/babymonster.png");
   mamaImg = loadImage("img/mama1.png");
 }
-
-window.preload = preload;
 
 // the tile-map set up - is going to be exported
 const map = [
@@ -185,12 +178,10 @@ const map = [
 
 function setup() {
   createCanvas(800, 600);
-  //frameRate(25);
+  frameRate(25);
   generateCoins(80);
   // playerImg = loadImage("img/babymonster.png");
 }
-
-window.setup = setup;
 
 //   baby monster start screen
 function babyMonsterStart() {
@@ -774,6 +765,3 @@ function draw() {
     failScreen();
   }
 }
-
-window.draw = draw;
-mamaRun.draw;
