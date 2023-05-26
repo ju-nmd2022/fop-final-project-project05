@@ -477,9 +477,9 @@ function drawCoin(x, y) {
 
 //style and draw coin cunter
 function drawCoinCounter() {
-  fill(0);
-  textSize(15);
-  text(`Coins: ${coinCount}`, 25, 34);
+  textSize(20);
+  fill(255, 255, 255);
+  text(`Coins: ${coinCount}`, 20, 0, 200);
 }
 
 function movePlayer() {
