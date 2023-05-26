@@ -656,6 +656,7 @@ function reset() {
   playerX = 1;
   playerY = 2;
   coinCount = 0;
+  gameTimer = 0;
   gameState = "start";
 }
 
@@ -712,7 +713,7 @@ function winScreen() {
   monsterMamaWin();
   info();
   textInfoWin();
-  clear();
+  reset();
 }
 
 // fail screen
