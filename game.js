@@ -1,3 +1,8 @@
+//The tile map in the following code have been based on code from https://www.youtube.com/watch?v=KsLChm2MIQY&t=801s.
+//The following website has been used as a reference for code to import pictures and parts of P5 drawings https://p5js.org/reference/#/p5/loadImage
+// ChatGPT has also been used to debug the code
+//The course material have also been used as a foundation to learn the necessary tools to complet this assignment.
+
 // load images for screen for backgrounds and characters
 let treeImg;
 let scaryImg;
